@@ -1,0 +1,37 @@
+
+
+<app-table-layout
+  [columns]="columns"
+  [data]="inquiries"
+  [isLoading]="loading"
+  [page]="page"
+  [totalPages]="totalPages"
+  [tableTitle]="tableTitle"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [topButtons]="topButtons"
+  [rowButtons]="rowButtons"
+  (pageChange)="goToPage($event)"
+  (pageSizeChange)="onPageSizeChange($event)"
+  (sortChange)="changeSort($event)"
+  [templates]="{ status: statusTemplate }"
+>
+<div class="filters mb-3">
+  <input type="text" placeholder="Company Name" [(ngModel)]="companyName" (input)="onFilterChange()" />
+  <select [(ngModel)]="status" (change)="onFilterChange()">
+    <option value="">All Statuses</option>
+    <option *ngFor="let s of statusOptions" [value]="s">{{ getStatusInfo(s).label }}</option>
+  </select>
+  <input type="date" [(ngModel)]="startDate" (change)="onFilterChange()" />
+  <input type="date" [(ngModel)]="endDate" (change)="onFilterChange()" />
+  <input type="number" placeholder="Min Budget" [(ngModel)]="minBudget" (input)="onFilterChange()" />
+  <input type="number" placeholder="Max Budget" [(ngModel)]="maxBudget" (input)="onFilterChange()" />
+</div>
+  <ng-template #statusTemplate let-row="row">
+    <select [(ngModel)]="row.status" (change)="updateInquiryStatus(row)">
+      <option *ngFor="let s of statusOptions" [value]="s">
+        {{ getStatusInfo(s).icon }} {{ getStatusInfo(s).label }}
+      </option>
+    </select>
+  </ng-template>
+</app-table-layout>

@@ -1,0 +1,94 @@
+.user-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: -40px 0 1.5rem 0; /* pull filters up by 40px, tweak as needed */
+    align-items: center;
+    padding: 8px 16px;
+
+    select {
+        /* General styling */
+        padding: 0.5rem 0.75rem; /* More generous padding for better touch targets */
+        font-size: 0.875rem; /* Slightly larger font size */
+        font-family: 'Inter', sans-serif; /* Use a modern sans-serif font */
+        line-height: 1.25;
+        border: 1px solid #d1d5db; /* A more subtle border color */
+        background-color: #ffffff; /* A clean white background */
+        color: #374151; /* A dark, readable text color */
+        border-radius: 8px; /* Slightly more rounded corners */
+        cursor: pointer;
+        transition: all 0.2s ease-in-out; /* Smooth transition for hover and focus */
+        min-width: 120px; /* A more reasonable minimum width */
+        box-sizing: border-box;
+        -webkit-appearance: none; /* Hide default dropdown arrow */
+        -moz-appearance: none;
+        appearance: none;
+
+        &:hover {
+            border-color: #9ca3af; /* Darken border on hover */
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Add a blue focus ring */
+            border-color: #3b82f6;
+        }
+
+        /* Styling for the disabled state */
+        &:disabled {
+            background-color: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+    }
+
+    /* Styles for the wrapper that contains the select and icon */
+    .filter-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Styles for the dropdown arrow icon */
+    .filter-arrow-icon {
+        position: absolute;
+        top: 50%;
+        right: 0.75rem;
+        transform: translateY(-50%);
+        pointer-events: none; /* Allows clicks to pass through to the select element */
+        color: #06b6d4;
+        font-size: 1rem;
+        
+    }
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}

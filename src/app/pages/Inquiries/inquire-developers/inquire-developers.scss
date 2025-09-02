@@ -1,0 +1,77 @@
+form {
+  background-color: white;
+  color: #1a202c;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+input,
+select,
+textarea {
+  background-color: white;
+  color: #1a202c;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.enquire-developer-container {
+  padding: 1rem 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  color: #2d3748;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.text-red-400 {
+  color: #ef4444;
+}
+
+.bg-cyan-500 {
+  background-color: #06b6d4;
+}
+
+.bg-cyan-500:hover {
+  background-color: #0891b2;
+}
+
+.bg-gray-600 {
+  background-color: #64748b;
+}
+
+.bg-gray-600:hover {
+  background-color: #4b5563;
+}
+
+button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+}

@@ -1,0 +1,126 @@
+<div class="dashboard-container" *ngIf="!isLoading; else loading">
+
+  <!-- Inquiry Counts -->
+  <div class="counts">
+        <div class="count-card total-dev-card">
+      <div class="header">
+        <div class="icon-container">
+          <i class="fas fa-users"></i>
+        </div>
+        <span class="percentage">+4.1%</span>
+      </div>
+      <div class="content">
+        <h4>Total Developers</h4>
+        <p>{{ totalDevelopers$ | async }}</p>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+        <div class="target">Total developers added</div>
+      </div>
+    </div>
+    <div class="count-card submitted-card">
+      <div class="header">
+        <div class="icon-container">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <span class="percentage">+12.5%</span>
+      </div>
+      <div class="content">
+        <h4>Submitted Inquiries</h4>
+        <p>{{ submittedCount$ | async }}</p>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 84%;"></div>
+        </div>
+        <div class="target">Monthly target: 1,000</div>
+      </div>
+    </div>
+    <div class="count-card in-progress-card">
+      <div class="header">
+        <div class="icon-container">
+          <i class="fas fa-spinner"></i>
+        </div>
+        <span class="percentage">+8.2%</span>
+      </div>
+      <div class="content">
+        <h4>Inquiries In Progress</h4>
+        <p>{{ inProgressCount$ | async }}</p>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 60%;"></div>
+        </div>
+        <div class="target">Monthly in progress growth</div>
+      </div>
+    </div>
+    <div class="count-card completed-card">
+      <div class="header">
+        <div class="icon-container">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <span class="percentage">+15.7%</span>
+      </div>
+      <div class="content">
+        <h4>Completed Inquiries</h4>
+        <p>{{ completedCount$ | async }}</p>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 90%;"></div>
+        </div>
+        <div class="target">Monthly completion rate</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Charts -->
+  <div class="charts">
+    <div class="chart-card">
+      <h4><i class="fas fa-chart-pie"></i> Inquiry Status</h4>
+      <canvas baseChart [data]="inquiriesStatusData" type="pie" [plugins]="pieChartPlugins" [options]="pieChartOptions">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h4><i class="fas fa-chart-line"></i> Inquiries {{ currentMonthName }}</h4>
+      <canvas baseChart [data]="inquiriesOverTimeData" type="line" [options]="lineChartOptions">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Top Developers -->
+  <div class="top-developers-table" *ngIf="topDevelopersTableData$ | async as tableData">
+    <h4><i class="fas fa-user-tie"></i> Top 5 Developers by Inquiries</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Developer</th>
+          <th>Total</th>
+          <th>Submitted</th>
+          <th>In Progress</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dev of tableData">
+          <td>{{ dev.name }}</td>
+          <td>{{ dev.total }}</td>
+          <td>{{ dev.submitted }}</td>
+          <td>{{ dev.inProgress }}</td>
+          <td>{{ dev.completed }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="spinner-container">
+    <div class="spinner"></div>
+    <p>Loading dashboard...</p>
+  </div>
+</ng-template>
+
+
+<!-- Loading Spinner Template -->
+<ng-template #loading>
+  <div class="spinner-container">
+    <div class="spinner"></div>
+    <p>Loading dashboard...</p>
+  </div>
+</ng-template>

@@ -1,0 +1,261 @@
+/* A sleek, modern dashboard with a professional light theme */
+
+// Define a professional color palette for a light theme
+$background-light: #f0f2f5;
+$card-light: #ffffff;
+$text-dark: #333333;
+$text-muted: #666666;
+$shadow-light: rgba(0, 0, 0, 0.1);
+
+// Mixin for clean transitions
+@mixin transition-ease($property) {
+  transition: $property 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Global styling for a modern feel
+.dashboard-container {
+  font-family: 'Inter', sans-serif;
+  background-color: $background-light;
+  color: $text-dark;
+  min-height: 100vh;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+// Common card styling for a unified look
+.count-card,
+.chart-card,
+.top-developers-table {
+  background-color: $card-light;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px $shadow-light;
+  @include transition-ease(transform);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Styling for the inquiry counts section
+.counts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+
+  .count-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .icon-container {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+          font-size: 1.5rem;
+          color: #fff;
+        }
+      }
+
+      .percentage {
+        font-size: 0.6rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        color: #fff;
+        background-color: #5cb85c;
+      }
+    }
+
+    .content {
+      h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-muted;
+        margin: 0;
+      }
+
+      p {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin: 0.5rem 0 1rem;
+      }
+
+      .progress-bar-container {
+        width: 100%;
+        height: 6px;
+        background-color: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.5s ease-in-out;
+      }
+
+      .target {
+        font-size: 0.85rem;
+        color: $text-muted;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  
+  // Specific color theming for each card
+  .submitted-card {
+    .icon-container { background-color: #0d83ff; }
+    .percentage { background-color: #5394ff; }
+    .progress-bar { background-color: #0d83ff; }
+  }
+
+  .in-progress-card {
+    .icon-container { background-color: #f6d16f; }
+    .percentage { background-color: #e5b244; }
+    .progress-bar { background-color: #f6d16f; }
+  }
+
+  .completed-card {
+    .icon-container { background-color: #5cb85c; }
+    .percentage { background-color: #4CAF50; }
+    .progress-bar { background-color: #5cb85c; }
+  }
+  
+  .total-dev-card {
+    .icon-container { background-color: #d8579d; } // Example color
+    .percentage { background-color: #c44a8b; } // Example color
+    .progress-bar { background-color: #d8579d; } // Example color
+  }
+}
+
+// Styling for the charts section
+.charts {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr; // default: 1 chart per row
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(2, 1fr); // 2 charts side by side
+  }
+
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    height: auto; // let content dictate height
+
+    h4 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: $text-dark;
+    }
+
+    canvas {
+      width: 100%;
+      height: 250px;       // smaller default height
+      max-height: 300px;   // limit maximum height
+    }
+  }
+}
+
+
+// Styling for the top developers section
+.top-developers-table {
+  h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $text-dark;
+
+    i {
+      color: #06B6D4;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0; // outer border
+
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+      border: 1px solid #e0e0e0; // all sides
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #06B6D4;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      &:first-child { border-top-left-radius: 8px; }
+      &:last-child { border-top-right-radius: 8px; }
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb; // zebra stripes
+    }
+
+    tbody tr:hover {
+      background-color: #f1f5f9; // hover effect
+    }
+  }
+}
+
+// Styling for the loading state
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.8rem;
+  color: $text-muted;
+}
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #555;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #06B6D4; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

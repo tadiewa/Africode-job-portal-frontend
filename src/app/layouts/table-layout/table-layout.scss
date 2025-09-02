@@ -1,0 +1,410 @@
+@use "sass:color";
+
+// Define the gradient colors based on your request
+$gradient-start: #2563eb; // A nice blue
+$gradient-end: #06b6d4; // A vibrant cyan
+
+// --- Light Theme Color Variables ---
+$bg-color: #f0f4f8; // Light background
+$table-color: #ffffff; // White table background
+$text-color: #1e293b; // Dark text color for readability
+$header-bg: #4a69bd; // Still works well
+$header-text: #ffffff;
+$accent-color: #3b82f6; // A slightly brighter blue for accents
+$shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08); // Lighter shadow
+$shadow-strong: 0 8px 20px rgba(0, 0, 0, 0.15); // Lighter, but more pronounced shadow
+$font-family: 'Inter', 'Segoe UI', sans-serif;
+$border-radius: 12px;
+$padding: 0.75rem 1.25rem;
+$transition-speed: 0.2s;
+
+
+
+.table-container {
+    width: 100%;
+    max-width: 1600px;
+    box-shadow: $shadow-strong;
+    border-radius: $border-radius;
+    background-color: $table-color; // Use light table background
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+     align-items: flex-start;     // <-- add this
+}
+
+.table-title {
+    display: block;              // block instead of inline-block
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.8;            // ensure enough line spacing
+    background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+      margin-bottom: 5px; // instead of 30px
+    overflow: visible;            // prevent clipping
+}
+
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    color: $text-color;
+    border-radius: 6px;
+    font-size: 12px;
+
+    width: 250px;       // fixed width
+    max-width: 300px;   // optional
+    flex-grow: 0;       // prevent it from stretching
+
+    transition: all 0.2s ease;
+
+    &:focus {
+        outline: none;
+        border-color: $accent-color;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+    }
+}
+
+
+.table-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: $padding;
+    color: white; // Dark text
+    background-color:#06b6d4;  // Light background
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+
+ &:hover {
+    background-color: color.adjust(#f1f5f9, $lightness: -5%);
+}
+}
+
+// The primary button with the gradient background
+.table-button.primary-btn {
+    background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+    box-shadow: $shadow-light;
+    color: white; // Override the text color for the primary button
+
+    &:hover {
+       background-image: linear-gradient(
+  to right, 
+  color.adjust($gradient-start, $lightness: -5%), 
+  color.adjust($gradient-end, $lightness: -5%)
+);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+}
+
+// The secondary button with a light border and no gradient
+.table-button.secondary-btn {
+    background-color: transparent;
+    border: 1px solid #e2e8f0; // Lighter border
+    color: $text-color; // Dark text
+    background-image: none;
+    box-shadow: none;
+
+    &:hover {
+        background-color: #f1f5f9; // Lighter hover background
+        transform: translateY(-2px);
+        box-shadow: $shadow-light;
+    }
+}
+
+.table-button svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.table-scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modern-table {
+    table-layout: auto;
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    font-family: $font-family;
+    font-size: 13px;
+    color: $text-color; // Dark text
+
+    th,
+    td {
+        padding: 0.5rem;
+        border: 1px solid #e2e8f0; // Lighter border
+        word-wrap: break-word;
+        min-width: 0;
+    }
+
+    th.sortable {
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05); // Lighter hover background
+        }
+    }
+
+    thead {
+        background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+        color: $header-text;
+        box-shadow: $shadow-light;
+    }
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: #f8fafc; // Lighter alternating rows
+        }
+
+        tr:hover {
+            background-color: #f1f5f9; // Lighter hover background
+            transform: scale(1.005);
+            box-shadow: $shadow-light;
+            z-index: 1;
+        }
+    }
+
+    th .sort-icon {
+        margin-left: 0.5rem;
+        vertical-align: middle;
+        display: inline-flex;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Skeleton Loader */
+.skeleton-row {
+    cursor: default;
+}
+
+.skeleton-bar {
+    background: #e2e8f0; // Lighter skeleton color
+    height: 1.25rem;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-bar.actions-bar {
+    width: 60%;
+    margin-left: auto;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+/* Actions */
+.actions-cell {
+    position: relative;
+    text-align: center;
+}
+
+.action-toggle {
+    background-color: #f1f5f9; // Light background
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    padding: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // Lighter shadow
+
+    &:hover {
+        background-color: #e2e8f0; // Lighter hover background
+        transform: scale(1);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: $text-color; // Dark stroke
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke 0.2s ease;
+    }
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    background: #ffffff; // Light background
+    border: 1px solid #e2e8f0; // Lighter border
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Lighter shadow
+    min-width: 120px;
+    padding: 0.5rem;
+    top: 100%;
+    right: 0;
+
+    &.visible {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &.open-up {
+        top: auto;
+        bottom: calc(100% + 10px);
+    }
+}
+
+.dropdown-item {
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: $text-color; // Dark text
+
+    &:hover {
+        background: #f1f5f9; // Lighter hover background
+    }
+
+    &.active {
+        background-color: $accent-color;
+        color: #fff;
+    }
+}
+
+/* Modern Pagination */
+.table-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+    font-family: $font-family;
+
+    .pagination-button {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0; // Lighter border
+        background-color: #f1f5f9; // Light background
+        color: $text-color; // Dark text
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover:not(.active):not(:disabled) {
+            background-color: $accent-color;
+            color: #fff;
+            border-color: $accent-color;
+        }
+
+        &.active {
+            background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+            color: #fff;
+            border-color: transparent;
+            pointer-events: none;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #e2e8f0;
+            color: #94a3b8;
+            background: #f8fafc;
+        }
+    }
+}
+
+/* Filters styles */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    align-items: center;
+
+    select {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        border: 1px solid #e2e8f0; // Lighter border
+        background-color: #f8fafc; // Very light background
+        color: $text-color; // Dark text
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        min-width: 180px;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        // Updated SVG fill for a dark arrow on a light background
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%231e293b"><path d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.5rem 1.5rem;
+
+        &:hover {
+            border-color: $accent-color;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $accent-color;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+        }
+    }
+
+    option {
+        background-color: #f8fafc; // Light background
+        color: $text-color; // Dark text
+    }
+    .table-scroll-wrapper {
+  overflow: visible; // allow dropdowns to show outside the table
+}
+
+}

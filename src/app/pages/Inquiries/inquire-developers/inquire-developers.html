@@ -1,0 +1,159 @@
+<form [formGroup]="inquiryForm" (ngSubmit)="onSubmit()"
+      class="space-y-6 p-6 rounded shadow-lg bg-white max-w-4xl mx-auto">
+
+  <button type="button" (click)="goBack()" 
+          class="flex items-center text-cyan-600 hover:text-cyan-800 font-semibold mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+         stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+    Back to Profile
+  </button>
+
+  <h2 class="text-2xl font-bold mb-6">
+    Inquire About {{ developer?.firstName || '' }} {{ developer?.lastName || '' }}
+  </h2>
+  <p class="mb-4">
+    Fill out this form to express your interest in working with {{ developer?.firstName || '' }} {{ developer?.lastName || '' }}. Our team will review your request and facilitate the connection.
+  </p>
+      
+
+    <section>
+        <h3 class="text-xl font-semibold mb-4 border-b pb-1">Your Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="fullName" class="block mb-1">Full Name *</label>
+                <input id="fullName" formControlName="fullName" required class="w-full border p-2 rounded" />
+                <div *ngIf="inquiryForm.get('fullName')?.invalid && inquiryForm.get('fullName')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Full Name is required.
+                </div>
+            </div>
+
+            <div>
+                <label for="email" class="block mb-1">Email *</label>
+                <input type="email" id="email" formControlName="email" required class="w-full border p-2 rounded" />
+                <div *ngIf="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Valid Email is required.
+                </div>
+            </div>
+
+            <div>
+                <label for="phone" class="block mb-1">Phone *</label>
+                <input id="phone" formControlName="phone" required class="w-full border p-2 rounded" />
+                <div *ngIf="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Phone number is required.
+                </div>
+            </div>
+
+            <div>
+                <label for="companyName" class="block mb-1">Company Name *</label>
+                <input id="companyName" formControlName="companyName" required class="w-full border p-2 rounded" />
+                <div *ngIf="inquiryForm.get('companyName')?.invalid && inquiryForm.get('companyName')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Company name is required.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3 class="text-xl font-semibold mt-8 mb-4 border-b pb-1">Project Details</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="projectType" class="block mb-1">Project Type *</label>
+                <select id="projectType" formControlName="projectType" required class="w-full border p-2 rounded">
+                    <option value="">Select Project Type</option>
+                    <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
+                </select>
+                <div *ngIf="inquiryForm.get('projectType')?.invalid && inquiryForm.get('projectType')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Project type is required.
+                </div>
+            </div>
+
+            <div>
+                <label for="projectBudget" class="block mb-1">Project Budget *</label>
+                <select id="projectBudget" formControlName="projectBudget" required class="w-full border p-2 rounded">
+                    <option value="">Select Budget</option>
+                    <option *ngFor="let budget of projectBudgets" [value]="budget">{{ budget }}</option>
+                </select>
+                <div *ngIf="inquiryForm.get('projectBudget')?.invalid && inquiryForm.get('projectBudget')?.touched"
+                    class="text-red-400 text-sm mt-1">
+                    Project budget is required.
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 w-full">
+                <label for="projectTimeline" class="block mb-1 font-medium text-gray-700">Project Timeline *</label>
+                <select id="projectTimeline" formControlName="projectTimeline" required
+                    class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                    <option value="">Select Timeline</option>
+                    <option *ngFor="let timeline of projectTimelineOptions" [value]="timeline">{{ timeline }}</option>
+                </select>
+                <div *ngIf="inquiryForm.get('projectTimeline')?.invalid && inquiryForm.get('projectTimeline')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    Project timeline is required.
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+    <section>
+        <div>
+            <label for="projectDesc" class="block mb-1">Project Description</label>
+            <textarea id="projectDesc" formControlName="projectDesc" rows="3" class="w-full border p-2 rounded"
+                placeholder="Any additional information, specific requirements, or questions you'd like to share?"></textarea>
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <label for="additionalNotes" class="block mb-1">Additional Notes</label>
+            <textarea id="additionalNotes" formControlName="additionalNotes" rows="3" class="w-full border p-2 rounded"
+                placeholder="Any additional information, specific requirements, or questions you'd like to share?"></textarea>
+        </div>
+    </section>
+ <section class="mt-6 bg-gray-100 p-4 rounded" *ngIf="developer">
+    <h3 class="text-xl font-semibold mb-4 border-b pb-1">Developer Summary</h3>
+    <p>
+        <span class="font-bold">{{ developer.firstName }} {{ developer.lastName }}</span> - {{ developer.country }}
+    </p>
+    <p>Rate: {{ developer.hourlyRate }}</p>
+    <p>
+        Skills: 
+        <ng-container *ngFor="let skill of developer.primarySkills; let i = index">
+            {{ skill.skill }}<span *ngIf="i < developer.primarySkills.length - 1">, </span>
+        </ng-container>
+        <span *ngIf="developer.primarySkills.length > 3">
+            and {{ developer.primarySkills.length - 3 }} more
+        </span>
+    </p>
+</section>
+
+
+
+    <input type="hidden" formControlName="developerId" />
+
+    <div *ngIf="formError" class="text-red-500 text-sm text-center mt-4">
+        {{ formError }}
+    </div>
+
+    <div class="text-center pt-6 flex justify-center space-x-4">
+        <button type="submit" [disabled]="loading"
+            class="bg-cyan-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-cyan-600 flex-1 max-w-xs">
+            {{ loading ? 'Submitting...' : 'Submit Inquiry' }}
+        </button>
+
+        <button type="button" (click)="onCancel()"
+            class="bg-gray-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-gray-700 transition flex-1 max-w-xs">
+            Cancel
+        </button>
+    </div>
+
+
+</form>

@@ -1,0 +1,131 @@
+section.login-section {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+
+  p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+
+      input {
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #4a90e2;
+          box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+        }
+
+        &:invalid {
+          border-color: #e74c3c;
+        }
+      }
+
+      small {
+        color: #e74c3c;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+      }
+    }
+
+    button {
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background-color: #357abd;
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background-color: #a6c8ff;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+.error-message {
+  color: #fff;
+  background: #dc3545; /* Bootstrap danger red */
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff; /* spinner color */
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Register Prompt */
+.register-prompt {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-prompt p {
+  color: #666;
+}
+
+.register-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}

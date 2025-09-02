@@ -1,0 +1,55 @@
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-md shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a routerLink="/" class="text-gray-900 text-4xl font-extrabold tracking-wide hover:scale-105 transition-transform duration-300">
+        Africode
+      </a>
+
+      <button
+        *ngIf="shouldShowSidebar()"
+        (click)="toggleSidebar()"
+        class="text-gray-800 md:hidden"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+
+      <div class="hidden md:flex space-x-8 text-gray-700 font-medium items-center">
+        <a *ngIf="!isLoggedIn" routerLink="/join-network" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Join Our Network</a>
+        <a *ngIf="isLoggedIn" routerLink="/explore-developers" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Explore</a>
+        <a *ngIf="isLoggedIn" routerLink="/dashboard" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Dashboard</a>
+        
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-cyan-600 transition-colors duration-300 text-lg">Log In</a>
+        <a *ngIf="isLoggedIn" (click)="logout()" class="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-red-600 transition-colors duration-300 cursor-pointer text-lg">Log Out</a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="flex pt-16">
+  <!-- Sidebar: only render if route allows -->
+  <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
+
+  <!-- Main Content -->
+  <main
+    class="flex-1 transition-all duration-300 px-4 sm:px-6 lg:px-8"
+    [ngClass]="{
+      'ml-64': isSidebarOpen && shouldShowSidebar(),
+      'ml-20': !isSidebarOpen && shouldShowSidebar()
+    }"
+  >
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-gray-300 py-2 text-center text-gray-700 px-4 sm:px-6 lg:px-8 mt-6">
+  <div class="max-w-7xl mx-auto">
+    <p class="text-xs font-medium mb-1">Connecting Developers to Global Clients</p>
+    <p class="text-[10px]">&copy; 2024 Africode Platform. All rights reserved.</p>
+  </div>
+</footer>

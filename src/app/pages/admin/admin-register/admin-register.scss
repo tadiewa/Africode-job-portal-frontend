@@ -1,0 +1,142 @@
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+/* Modal container */
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #374151;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #3b82f6;
+}
+
+/* Modal title */
+.modal h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+/* Optional underline under title */
+.modal h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #3b82f6;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Form rows */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+/* Form groups */
+.form-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+input, select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  color: #111827;
+  transition: border 0.2s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+small {
+  color: #ef4444; /* Red for validation errors */
+  margin-top: 0.25rem;
+}
+
+/* Submit button */
+button[type="submit"] {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background-color: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #2563eb;
+}
+
+button[disabled] {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

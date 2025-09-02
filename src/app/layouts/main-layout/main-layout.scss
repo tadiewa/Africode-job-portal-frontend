@@ -1,0 +1,26 @@
+/* C:\Talent Pool\code-africa\src\app\layouts\main-layout\main-layout.component.scss */
+
+/* SCSS variables for consistent styling */
+$nav-bg-color: #000;
+$nav-text-color: #fff;
+$nav-link-color: #ffffffc9;
+$nav-hover-color: #fff;
+$footer-bg-color: #111827; // bg-gray-900 in Tailwind
+$footer-text-color: #9ca3af; // text-gray-400 in Tailwind
+$brand-color: #fff;
+
+nav {
+   background-image: url('/assets/images/banner.png');
+  // Styles for the fixed navigation bar
+  // The rest of the styling is handled by Tailwind classes in the HTML file
+  // e.g., bg-black/30 backdrop-blur-sm shadow-lg
+  a {
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+}
+
+footer {
+  // Styles for the footer
+  border-top: 1px solid #ffffff; // border-gray-800
+   background-image: url('/assets/images/banner.png');
+}

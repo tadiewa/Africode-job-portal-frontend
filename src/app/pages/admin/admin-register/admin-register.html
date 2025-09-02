@@ -1,0 +1,85 @@
+<!-- Modal Backdrop -->
+<div class="modal-backdrop">
+  <div class="modal">
+    <button class="close-btn" (click)="closeModal.emit()">×</button>
+    <h2>{{ isEditMode ? 'Edit Admin' : 'Admin Registration' }}</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Row 1: First & Last Name -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" formControlName="firstName" placeholder="Enter first name" />
+          <small *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid">
+            First name is required
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" formControlName="lastName" placeholder="Enter last name" />
+          <small *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid">
+            Last name is required
+          </small>
+        </div>
+      </div>
+
+      <!-- Row 2: Country & Phone -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" formControlName="country">
+            <option value="" disabled selected>Select country</option>
+            <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+          </select>
+          <small *ngIf="registerForm.get('country')?.touched && registerForm.get('country')?.invalid">
+            Country is required
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input id="phoneNumber" formControlName="phoneNumber" placeholder="Enter phone number" />
+          <small *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
+            Phone number is required
+          </small>
+        </div>
+      </div>
+
+      <!-- Row 3: Email & Password -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" placeholder="Enter email" [readonly]="isEditMode" />
+          <small *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+            Please enter a valid email
+          </small>
+        </div>
+
+        <div class="form-group" *ngIf="!isEditMode">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" placeholder="Enter password" />
+          <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+            Password must be at least 6 characters
+          </small>
+        </div>
+      </div>
+
+      <!-- Row 4: Confirm Password -->
+      <div class="form-row" *ngIf="!isEditMode">
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirm password" />
+          <small *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid && !registerForm.errors?.['notMatching']">
+            Confirm password is required
+          </small>
+          <small *ngIf="registerForm.errors?.['notMatching'] && registerForm.get('confirmPassword')?.touched">
+            Passwords must match
+          </small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid || isSubmitting">
+        {{ isEditMode ? 'Update Admin' : 'Register' }}
+      </button>
+    </form>
+  </div>
+</div>

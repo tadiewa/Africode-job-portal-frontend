@@ -1,0 +1,32 @@
+<form (ngSubmit)="onUpload()" class="upload-form">
+  <h2 class="form-title">Upload Document</h2>
+
+  <div class="form-group">
+    <label for="file" class="form-label">Choose File *</label>
+    <input
+      type="file"
+      id="file"
+      (change)="onFileSelected($event)"
+      required
+      class="file-input"
+    />
+  </div>
+
+  <div *ngIf="fileName" class="selected-file-info">
+    Selected file: {{ fileName }}
+  </div>
+
+  <div class="form-actions">
+    <button
+      type="submit"
+      [disabled]="!selectedFile || loading"
+      class="upload-button"
+    >
+      {{ loading ? 'Uploading...' : 'Upload' }}
+    </button>
+
+    <button type="button" (click)="resetForm()" class="cancel-button">
+      Cancel
+    </button>
+  </div>
+</form>

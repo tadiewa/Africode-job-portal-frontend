@@ -1,0 +1,89 @@
+/* C:\Talent Pool\code-africa\src\app\pages\home\home.component.scss */
+
+// SCSS variables for consistent color palette
+$brand-blue: #2563eb;
+$brand-cyan: #06b6d4;
+$brand-purple: #a855f7;
+$brand-green: #22c55e;
+$brand-yellow: #f59e0b;
+$bg-dark: #0d0d0d;
+$text-light: #e2e8f0;
+
+// Keyframe animations
+.animate-fade-in-down {
+  animation: fadeInDown 1s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Styles for the hero section background overlay
+section.relative::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.1), rgba(0,0,0,0));
+  z-index: 1;
+   display: none; // remove the dark overlay completely
+}
+
+// Enhancements for the sections and cards
+.bg-gray-900 {
+  .inline-block {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+.bg-gray-800 {
+  .transform {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    &:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

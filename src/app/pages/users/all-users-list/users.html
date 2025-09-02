@@ -1,0 +1,77 @@
+<app-table-layout
+    [columns]="columns"
+    [data]="filteredUsers"
+    [isLoading]="loading"
+    [page]="page"
+    [totalPages]="totalPages"
+    [tableTitle]="tableTitle"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [topButtons]="topButtons"
+    [rowButtons]="rowButtons"
+    [searchTerm]="searchTerm"
+    (pageChange)="goToPage($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (searchChange)="onSearchChange($event)"
+    (sortChange)="changeSort($event)"
+>
+  <!-- Unified toolbar: search + filters -->
+  <div class="filters-toolbar">
+    <!-- Search input from table layout -->
+
+
+
+    <!-- Filters -->
+    <div class="user-filters">
+      <div class="filter-wrapper">
+        <select [(ngModel)]="filterCountry" (change)="applyFilters()">
+          <option value="">Country</option>
+          <option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </option>
+        </select>
+        <i class="fa-solid fa-earth-americas filter-arrow-icon"></i>
+      </div>
+
+      <!-- <div class="filter-wrapper">
+        <select [(ngModel)]="filterExperienceLevel" (change)="applyFilters()">
+          <option value="">Experience</option>
+          <option *ngFor="let level of experienceLevels" [value]="level">
+            {{ level }}
+          </option>
+        </select>
+        <i class="fa-solid fa-medal filter-arrow-icon"></i>
+      </div> -->
+<!-- 
+      <div class="filter-wrapper">
+        <select [(ngModel)]="filterHourlyRate" (change)="applyFilters()">
+          <option value="">Rate</option>
+          <option *ngFor="let rate of hourlyRates" [value]="rate">
+            {{ rate }}
+          </option>
+        </select>
+        <i class="fa-solid fa-dollar-sign filter-arrow-icon"></i>
+      </div> -->
+
+      <!-- <div class="filter-wrapper">
+        <select [(ngModel)]="filterSkillCategory" (change)="onSkillCategoryChange()">
+          <option value="">Category</option>
+          <option *ngFor="let category of availableSkillCategories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        <i class="fa-solid fa-list-ul filter-arrow-icon"></i>
+      </div> -->
+
+      <!-- <div class="filter-wrapper">
+        <select [(ngModel)]="filterSkillName" (change)="onSkillNameChange()" [disabled]="!filterSkillCategory">
+          <option value="">Skill</option>
+          <option *ngFor="let skill of availableSkills" [value]="skill">
+            {{ skill }}
+          </option>
+        </select>
+        <i class="fa-solid fa-cogs filter-arrow-icon"></i>
+      </div> -->
+    </div>
+  </div>
+</app-table-layout>

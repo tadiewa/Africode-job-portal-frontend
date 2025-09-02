@@ -1,0 +1,14 @@
+.explore-developers-container {
+
+ // Set the background to white
+  color: #4a5568;           // Set the text color to a dark gray
+  border-radius: 8px;       // Optional: rounded corners for aesthetics
+  padding: 20px;            // Optional: add some padding
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Optional: subtle shadow for depth
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  user-select: none;
+}

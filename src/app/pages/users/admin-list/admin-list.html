@@ -1,0 +1,33 @@
+<div class="main-container">
+
+  <!-- Admin Table -->
+<app-table-layout
+  [columns]="columns"
+  [data]="users"        
+  [isLoading]="loading"
+  [page]="page"
+  [totalPages]="totalPages"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [tableTitle]="tableTitle"
+  [topButtons]="topButtons"
+  [rowButtons]="rowButtons"
+  [searchTerm]="searchTerm"
+  (searchChange)="onSearchChange($event)"
+  (pageChange)="goToPage($event)"
+  (pageSizeChange)="onPageSizeChange($event)"
+  (sortChange)="changeSort($event)"
+></app-table-layout>
+
+
+  <!-- Admin Register Modal -->
+  <div *ngIf="showRegisterModal" class="modal-overlay">
+    <div class="modal-content">
+      <app-admin-register
+        [adminData]="selectedAdmin"
+        (closeModal)="closeRegisterModal()"
+      ></app-admin-register>
+    </div>
+  </div>
+
+</div>

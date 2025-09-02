@@ -1,0 +1,84 @@
+// Variables for colors and spacing
+$primary-color: #06b6d4; // A shade of cyan
+$primary-hover-color: #0891b2; // A darker shade of cyan
+$secondary-color: #6b7280; // A shade of gray
+$secondary-hover-color: #4b5563; // A darker shade of gray
+$bg-color: #fff;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$border-color: #e5e7eb;
+
+.upload-form {
+  padding: 1rem;
+  background-color: $bg-color;
+  border-radius: 0.5rem;
+  box-shadow: $shadow;
+  max-width: 28rem;
+  margin: 0 auto;
+  
+  // This replaces the functionality of .space-y-4
+  > * + * {
+    margin-top: 1rem;
+  }
+  
+  .form-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  
+  .file-input {
+    border: 1px solid $border-color;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+  }
+
+  .selected-file-info {
+    font-size: 0.875rem;
+    color: #4b5563;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      color: #fff;
+      transition: background-color 0.2s ease-in-out;
+      
+      &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+    
+    .upload-button {
+      background-color: $primary-color;
+      
+      &:hover {
+        background-color: $primary-hover-color;
+      }
+    }
+    
+    .cancel-button {
+      background-color: $secondary-color;
+      
+      &:hover {
+        background-color: $secondary-hover-color;
+      }
+    }
+  }
+}

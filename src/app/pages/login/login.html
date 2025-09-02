@@ -1,0 +1,35 @@
+<section class="login-section">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Welcome!</h2>
+    <p>Please log in to your account.</p>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" placeholder="Enter email" />
+      <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']" class="error-text">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']" class="error-text">Invalid email format.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" placeholder="Enter password" />
+      <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']" class="error-text">Password is required.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loading" class="login-button">
+      <span *ngIf="loading" class="spinner"></span>
+      {{ loading ? 'Logging in...' : 'Login' }}
+    </button>
+  </form>
+  <div class="register-prompt">
+    <p>Don't have an account? <a href="/join-network" class="register-link">Register</a></p>
+  </div>
+</section>

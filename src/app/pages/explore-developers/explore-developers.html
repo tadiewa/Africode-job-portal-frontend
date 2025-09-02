@@ -1,0 +1,123 @@
+<div class="explore-developers-container mx-auto px-4 py-8 join-network-container">
+  <h1 class="text-3xl font-bold text-center mb-4 mt-12">Explore Top Developers</h1>
+  <p class="text-center mb-12 text-gray-600 text-lg">
+    Find the perfect talent for your project with project-based, full-time, or part-time opportunities.
+  </p>
+
+  <!-- Filters -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+    <div class="flex flex-wrap gap-3 justify-center">
+
+      <!-- Name Search -->
+      <div class="flex flex-col">
+        <label class="text-sm font-medium text-gray-700 mb-1">Search by Name</label>
+        <input type="text" [(ngModel)]="searchTerm" (input)="onFilterChange()"
+               placeholder="Enter developer name..." class="px-3 py-2 border rounded text-sm min-w-[180px]" />
+      </div>
+
+      <!-- Category -->
+      <div class="flex flex-col">
+        <label class="text-sm font-medium text-gray-700 mb-1">Skills Category</label>
+        <select [(ngModel)]="selectedCategory" (change)="onFilterChange()"
+                class="px-3 py-2 border rounded text-sm min-w-[180px]">
+          <option value="All Categories">All Categories</option>
+          <option *ngFor="let category of skillCategories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+
+      <!-- Skill -->
+      <div class="flex flex-col">
+        <label class="text-sm font-medium text-gray-700 mb-1">Specific Skill</label>
+        <select [(ngModel)]="selectedSkill" (change)="onFilterChange()"
+                class="px-3 py-2 border rounded text-sm min-w-[180px]">
+          <option value="">Select Category First</option>
+          <option *ngFor="let skill of uniqueSkillsList" [value]="skill">{{ skill }}</option>
+        </select>
+      </div>
+
+      <!-- Country -->
+      <div class="flex flex-col">
+        <label class="text-sm font-medium text-gray-700 mb-1">Country</label>
+        <select [(ngModel)]="selectedCountry" (change)="onFilterChange()"
+                class="px-3 py-2 border rounded text-sm min-w-[180px]">
+          <option value="All Countries">All Countries</option>
+          <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+        </select>
+      </div>
+
+      <!-- Rate -->
+      <div class="flex flex-col">
+        <label class="text-sm font-medium text-gray-700 mb-1">Hourly Rate</label>
+        <select [(ngModel)]="selectedRate" (change)="onFilterChange()"
+                class="px-3 py-2 border rounded text-sm min-w-[180px]">
+          <option value="">All Rates</option>
+          <option *ngFor="let rate of rates" [value]="rate">{{ rate }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer Grid -->
+  <div class="grid grid-cols-5 gap-6 max-w-7xl mx-auto">
+    <div *ngFor="let dev of filteredDevelopers"
+         class="bg-white rounded-lg shadow-md p-5 flex flex-col items-center min-h-[10px]">
+
+      <img loading="lazy"
+           src="https://placehold.co/100x100/A0AEC0/FFFFFF?text={{ dev.firstName.charAt(0) || 'U' }}"
+           alt="{{ dev.firstName || 'Unknown' }}"
+           class="w-20 h-20 rounded-full object-cover mb-4" />
+
+      <h2 class="text-base font-semibold text-center mb-2">{{ dev.firstName }}</h2>
+      <p class="text-xs text-gray-500 text-center mb-1">{{ dev.experienceLevel }}</p>
+      <p class="text-xs text-gray-500 text-center mb-1">📍 {{ dev.country }}</p>
+      <p class="text-sm text-yellow-500 text-center mb-2">⭐ 4.5</p>
+
+      <!-- Skills -->
+      <div class="flex flex-wrap justify-center gap-2 mb-4">
+        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-lg"
+              *ngFor="let skill of dev.primarySkills.slice(0, 2)">
+          {{ skill.skill }}
+        </span>
+
+        <span *ngIf="dev.primarySkills.length > 2"
+              class="bg-gray-300 text-gray-700 text-xs px-2 py-1 rounded-lg cursor-pointer"
+              (click)="toggleSkills(dev.id)">
+          +{{ dev.primarySkills.length - 2 }}
+        </span>
+
+        <ng-container *ngIf="expandedSkills[dev.id]">
+          <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-lg"
+                *ngFor="let skill of dev.primarySkills.slice(2)">
+            {{ skill.skill }}
+          </span>
+        </ng-container>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex items-center justify-between w-full px-2 mt-auto space-x-2">
+        <span class="font-semibold text-sm">{{ dev.hourlyRate }}</span>
+        <button [routerLink]="['/inquire-developers', dev.id]"
+                class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap">
+          Inquire
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center mt-6 space-x-2">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 0"
+            class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">Prev</button>
+
+    <button *ngFor="let page of [].constructor(totalPages); let i = index"
+            (click)="goToPage(i)"
+            [class.bg-blue-500]="currentPage === i"
+            [class.text-white]="currentPage === i"
+            class="px-4 py-2 rounded hover:bg-blue-400 hover:text-white">
+      {{ i + 1 }}
+    </button>
+
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages - 1"
+            class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">Next</button>
+  </div>
+</div>

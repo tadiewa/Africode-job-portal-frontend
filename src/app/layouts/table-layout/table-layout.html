@@ -1,0 +1,117 @@
+<div class="table-container">
+  <!-- Table Header -->
+  <div class="table-header-content">
+    <h2 class="table-title">{{ tableTitle }}</h2>
+    <div class="table-actions">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="search-input"
+        [value]="searchTerm"
+        (input)="onSearchInput($event)"
+      />
+      <ng-container *ngFor="let btn of topButtons">
+        <button
+          class="table-button"
+          [ngClass]="{'primary-btn': btn.type === 'primary', 'secondary-btn': btn.type === 'secondary'}"
+          (click)="onButtonClick(btn)"
+        >
+          {{ btn.label }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Optional ng-content for custom templates -->
+  <ng-content></ng-content>
+
+  <!-- Table Body -->
+  <div class="table-scroll-wrapper">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns"
+              [class.sortable]="column.field !== 'actions'"
+              (click)="column.field !== 'actions' && onSort(column.field)">
+            {{ column.header }}
+            <ng-container *ngIf="column.field !== 'actions'">
+              <span class="sort-icon">
+                <svg *ngIf="sortedColumn !== column.field" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <svg *ngIf="sortedColumn === column.field && sortDirection === 'asc'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg>
+                <svg *ngIf="sortedColumn === column.field && sortDirection === 'desc'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M19 12l-7 7-7-7"></path></svg>
+              </span>
+            </ng-container>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Skeleton Loader -->
+        <ng-container *ngIf="isLoading">
+          <tr class="skeleton-row" *ngFor="let i of [1,2,3,4,5]">
+            <td *ngFor="let column of columns">
+              <div class="skeleton-bar"></div>
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- Actual Data -->
+        <ng-container *ngIf="!isLoading">
+          <tr *ngFor="let row of data; let i = index">
+            <td *ngFor="let column of columns">
+              <ng-container *ngIf="templates[column.field]; else defaultCell">
+                <ng-container *ngTemplateOutlet="templates[column.field]; context: { row: row }"></ng-container>
+              </ng-container>
+              <ng-template #defaultCell>
+                <ng-container *ngIf="column.field !== 'actions'; else actionsCell">
+                  {{ row[column.field] }}
+                </ng-container>
+              </ng-template>
+              <ng-template #actionsCell>
+                <div class="actions-dropdown">
+                  <button class="action-toggle" (click)="toggleDropdown(i)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="1"></circle>
+                      <circle cx="19" cy="12" r="1"></circle>
+                      <circle cx="5" cy="12" r="1"></circle>
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu"
+                       [class.visible]="activeDropdownIndex === i"
+                       [class.open-up]="shouldOpenUp(i)">
+                    <button
+                      *ngFor="let btn of rowButtons"
+                      class="dropdown-item"
+                      (click)="onButtonClick(btn, row)">
+                      {{ btn.label }}
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+<!-- Pagination -->
+<div class="table-pagination" *ngIf="data && data.length > 0">
+  <button class="pagination-button" (click)="prevPage()" [disabled]="page === 1">
+    Back
+  </button>
+
+  <ng-container *ngFor="let p of getPageNumbers()">
+    <button class="pagination-button"
+            [class.active]="p === page"
+            (click)="goToPage(p)">
+      {{ p }}
+    </button>
+  </ng-container>
+
+  <button class="pagination-button" (click)="nextPage()" [disabled]="page === totalPages">
+    Next
+  </button>
+</div>
+
+</div>

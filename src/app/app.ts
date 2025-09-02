@@ -1,12 +1,22 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    HttpClientModule,
+    CommonModule,
+  ],
+  template: `
+    <!-- Loads the correct layout dynamically -->
+    <router-outlet></router-outlet>
+  `,
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('code-africa');
+  title = 'africode-frontend';
 }

@@ -1,0 +1,89 @@
+<!-- base-table.html -->
+<div class="table-wrapper">
+  <div class="header-container">
+    <h2>{{ title }}</h2>
+    <div class="filter-container">
+      <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearchChange(searchTerm)" class="search-input" />
+      <!-- Add more filters here as needed -->
+    </div>
+  </div>
+
+  <div class="export-buttons" *ngIf="showExportButtons">
+    <button (click)="onExport('csv')">Export CSV</button>
+    <button (click)="onExport('xlsx')">Export Excel</button>
+  </div>
+
+  <!-- Loading State -->
+  <ng-container *ngIf="loading; else tableContent">
+    <div class="loading-state">
+      <div class="skeleton-loader-row" *ngFor="let i of [1, 2, 3, 4, 5]">
+        <div class="skeleton-col"></div>
+        <div class="skeleton-col"></div>
+        <div class="skeleton-col"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #tableContent>
+    <div class="table-container" *ngIf="data && data.length > 0; else noData">
+      <table>
+        <thead>
+          <tr>
+            <th class="non-sortable">#</th>
+            <th
+              *ngFor="let col of columns"
+              [class.sortable]="col.sortable"
+              (click)="sortData(col.field)"
+            >
+              {{ col.label }}
+              <span class="sort-icon" *ngIf="col.sortable">
+                <i
+                  class="fas fa-sort-up"
+                  [class.active]="sortColumn === col.field && sortDirection === 'asc'"
+                ></i>
+                <i
+                  class="fas fa-sort-down"
+                  [class.active]="sortColumn === col.field && sortDirection === 'desc'"
+                ></i>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of paginatedData; let i = index">
+            <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+           <td *ngFor="let col of columns">
+  <ng-container *ngIf="col.render; else defaultCell">
+    {{ col.render(row) }}
+  </ng-container>
+  <ng-template #defaultCell>{{ row[col.field] }}</ng-template>
+</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data-message">No data available.</p>
+    </ng-template>
+
+    <div class="pagination-controls" *ngIf="internalData && internalData.length > 0">
+      <div class="page-size-selector">
+  <span>Items per page:</span>
+  <select #pageSizeSelect [ngModel]="pageSize" (change)="onPageSizeChange(pageSizeSelect.value)">
+    <option [ngValue]="10">10</option>
+    <option [ngValue]="25">25</option>
+    <option [ngValue]="50">50</option>
+    <option [ngValue]="100">100</option>
+  </select>
+</div>
+
+      <div class="pagination-buttons">
+        <button (click)="prevPage()" [disabled]="currentPage <= 1">Previous</button>
+        <span class="pagination-info">Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage >= totalPages()">Next</button>
+      </div>
+    </div>
+  </ng-template>
+</div>
