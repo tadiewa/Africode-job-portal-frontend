@@ -1,45 +1,97 @@
 <!-- NAVBAR -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-md shadow-lg">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <a routerLink="/" class="text-gray-900 text-4xl font-extrabold tracking-wide hover:scale-105 transition-transform duration-300">
+      <!-- Logo -->
+      <a routerLink="/" class="text-gray-900 text-3xl font-extrabold tracking-tight hover:text-cyan-600 transition-colors duration-300">
         Africode
       </a>
 
+      <!-- Hamburger (mobile only) -->
       <button
-        *ngIf="shouldShowSidebar()"
-        (click)="toggleSidebar()"
-        class="text-gray-800 md:hidden"
+        (click)="toggleMobileMenu()"
+        class="text-gray-500 md:hidden p-2 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 transition-colors duration-200"
       >
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg *ngIf="!isMobileMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        <svg *ngIf="isMobileMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <div class="hidden md:flex space-x-8 text-gray-700 font-medium items-center">
-        <a *ngIf="!isLoggedIn" routerLink="/join-network" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Join Our Network</a>
-        <a *ngIf="isLoggedIn" routerLink="/explore-developers" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Explore</a>
-        <a *ngIf="isLoggedIn" routerLink="/dashboard" class="hover:text-cyan-700 transition hover:scale-105 text-lg">Dashboard</a>
-        
-        <a *ngIf="!isLoggedIn" routerLink="/login" class="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-cyan-600 transition-colors duration-300 text-lg">Log In</a>
-        <a *ngIf="isLoggedIn" (click)="logout()" class="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-red-600 transition-colors duration-300 cursor-pointer text-lg">Log Out</a>
-        
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-6 lg:space-x-8 text-gray-700 font-medium items-center">
+        <a *ngIf="showHomeLink()" routerLink="/" class="relative text-base pb-1 group hover:text-cyan-600 transition-colors duration-300">
+          Home
+          <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+
+        <ng-container *ngIf="!isLoggedIn; else loggedInLinks">
+          <a routerLink="/join-network" class="relative text-base pb-1 group hover:text-cyan-600 transition-colors duration-300">
+            Join Our Network
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a routerLink="/login" class="px-5 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 text-base shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+            Log In
+          </a>
+        </ng-container>
+
+        <ng-template #loggedInLinks>
+          <a routerLink="/explore-developers" class="relative text-base pb-1 group hover:text-cyan-600 transition-colors duration-300">
+            Explore
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a routerLink="/dashboard" class="relative text-base pb-1 group hover:text-cyan-600 transition-colors duration-300">
+            Dashboard
+            <span class="absolute left-0 bottom-0 w-full h-0.5 bg-cyan-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+          </a>
+          <a (click)="logout()" class="px-5 py-2 rounded-lg bg-gradient-to-r from-rose-500 to-red-600 text-white font-semibold hover:from-rose-600 hover:to-red-700 transition-all duration-300 cursor-pointer text-base shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+            Log Out
+          </a>
+        </ng-template>
       </div>
     </div>
   </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMobileMenuOpen" class="md:hidden bg-white shadow-lg rounded-lg mt-2 mx-2 py-2 space-y-1">
+    <a *ngIf="showHomeLink()" routerLink="/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" (click)="closeMobileMenu()">
+      Home
+    </a>
+
+    <ng-container *ngIf="!isLoggedIn; else loggedInMobileLinks">
+      <a routerLink="/join-network" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" (click)="closeMobileMenu()">
+        Join Our Network
+      </a>
+      <a routerLink="/login" class="block px-4 py-2 text-white bg-cyan-500 rounded hover:bg-cyan-600 mx-4" (click)="closeMobileMenu()">
+        Log In
+      </a>
+    </ng-container>
+
+    <ng-template #loggedInMobileLinks>
+      <a routerLink="/explore-developers" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" (click)="closeMobileMenu()">
+        Explore
+      </a>
+      <a routerLink="/dashboard" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" (click)="closeMobileMenu()">
+        Dashboard
+      </a>
+      <a (click)="logout()" class="block px-4 py-2 text-white bg-rose-500 rounded hover:bg-rose-600 mx-4 cursor-pointer">
+        Log Out
+      </a>
+    </ng-template>
+  </div>
 </nav>
 
-<!-- MAIN LAYOUT -->
-<div class="flex pt-16">
-  <!-- Sidebar: only render if route allows -->
+<!-- MAIN CONTENT -->
+<div class="flex pt-16 bg-gray-50 min-h-screen">
   <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
 
-  <!-- Main Content -->
   <main
-    class="flex-1 transition-all duration-300 px-4 sm:px-6 lg:px-8"
+    class="flex-1 transition-all duration-300 px-4 sm:px-6 lg:px-8 py-8"
     [ngClass]="{
-      'ml-64': isSidebarOpen && shouldShowSidebar(),
-      'ml-20': !isSidebarOpen && shouldShowSidebar()
+      'md:ml-64': isSidebarOpen && shouldShowSidebar(),
+      'md:ml-20': !isSidebarOpen && shouldShowSidebar()
     }"
   >
     <router-outlet></router-outlet>
@@ -47,9 +99,15 @@
 </div>
 
 <!-- FOOTER -->
-<footer class="bg-gray-300 py-2 text-center text-gray-700 px-4 sm:px-6 lg:px-8 mt-6">
-  <div class="max-w-7xl mx-auto">
-    <p class="text-xs font-medium mb-1">Connecting Developers to Global Clients</p>
-    <p class="text-[10px]">&copy; 2024 Africode Platform. All rights reserved.</p>
+<footer class="bg-gray-900 py-6 text-center text-gray-400 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto flex flex-col items-center space-y-2">
+    <p class="text-sm font-light">Connecting African Developers to Global Clients</p>
+    <div class="flex space-x-4">
+      <a href="#" class="text-gray-500 hover:text-white transition-colors duration-200"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="text-gray-500 hover:text-white transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="text-gray-500 hover:text-white transition-colors duration-200"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-gray-500 hover:text-white transition-colors duration-200"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p class="text-xs mt-2">&copy; 2024 Africode Platform. All rights reserved.</p>
   </div>
 </footer>

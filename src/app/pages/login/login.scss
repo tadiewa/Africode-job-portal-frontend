@@ -84,19 +84,21 @@ section.login-section {
     }
   }
 }
+
+/* Error Message */
 .error-message {
   color: #fff;
-  background: #dc3545; /* Bootstrap danger red */
+  background: #dc3545;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 15px;
   font-size: 14px;
 }
 
-
+/* Spinner */
 .spinner {
   border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid #fff; /* spinner color */
+  border-top: 3px solid #fff;
   border-radius: 50%;
   width: 16px;
   height: 16px;
@@ -110,22 +112,54 @@ section.login-section {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 /* Register Prompt */
 .register-prompt {
   margin-top: 20px;
   text-align: center;
+
+  p {
+    color: #666;
+  }
+
+  .register-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-.register-prompt p {
-  color: #666;
-}
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 480px) {
+  section.login-section {
+    margin: 2rem 1rem;
+    padding: 2rem;
+    max-width: 100%;
 
-.register-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
+    h2 {
+      font-size: 1.5rem;
+    }
 
-.register-link:hover {
-  text-decoration: underline;
+    p {
+      font-size: 0.85rem;
+    }
+
+    form {
+      gap: 1rem;
+
+      div input {
+        padding: 0.65rem;
+        font-size: 0.95rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 0.7rem;
+      }
+    }
+  }
 }

@@ -126,6 +126,61 @@ export const skillsCategories = {
     "Headless CMS (Strapi, Sanity, Contentful)",
     "Email development (MJML, SendGrid, Mailchimp integration)",
     "Embedded systems / Arduino (for IoT devs)"
+  ],
+  "Digital Marketing": [
+    "SEO",
+    "Content Marketing",
+    "Social Media Marketing",
+    "Email Marketing",
+    "PPC Advertising",
+    "Analytics (Google Analytics, etc.)",
+    "Marketing Automation",
+    "Conversion Rate Optimization",
+    "Brand Strategy"
+  ],
+  "Business Analysis": [
+    "Requirements Gathering",
+    "Stakeholder Management",
+    "Business Process Modeling",
+    "Data Analysis",
+    "SWOT Analysis",
+    "Project Management",
+    "Agile Methodologies",
+    "Documentation"
+  ],
+  "Accountancy": [
+    "Financial Reporting",
+    "Taxation",
+    "Audit & Compliance",
+    "Budgeting",
+    "Cost Accounting",
+    "Forensic Accounting",
+    "Financial Forecasting"
+  ],
+  "Virtual Assistance": [
+    "Calendar Management",
+    "Email Management",
+    "Social Media Management",
+    "Customer Service",
+    "Data Entry",
+    "Research Skills",
+    "Document Management"
+  ],
+  "Sales Development": [
+    "Lead Generation",
+    "Cold Calling",
+    "CRM Software (Salesforce, etc.)",
+    "Sales Strategy",
+    "Negotiation Skills",
+    "Customer Relationship Management"
+  ],
+  "Business Development": [
+    "Strategic Planning",
+    "Market Research",
+    "Networking",
+    "Partnership Development",
+    "Sales Strategy",
+    "Project Management"
   ]
 };
 
@@ -203,3 +258,15 @@ export const  hourlyRateRanges = [
     "6+ months",
     "Ongoing relationship"
   ];
+  export const roles = {
+  // "User": "USER",
+  // "Admin": "ADMIN",
+  "Employer": "EMPLOYER",
+  "Developer": "DEVELOPER",
+  "Business Analyst": "BUSINESS_ANALYST",
+  "Accountant": "ACCOUNTANT",
+  "Virtual Assistant": "VIRTUAL_ASSISTANT",
+  "Digital Marketer": "DIGITAL_MARKETER",
+  "Sales Development Representative": "SALES_DEVELOPMENT_REPRESENTATIVE",
+  "Business Development": "BUSINESS_DEVELOPMENT"
+};
