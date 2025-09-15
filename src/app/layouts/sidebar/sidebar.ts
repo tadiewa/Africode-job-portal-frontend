@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
-import { AuthService } from '../../services/auth.service'; // Assuming you have AuthService to get current user role
+import { AuthService } from '../../services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,31 +13,44 @@ import { AuthService } from '../../services/auth.service'; // Assuming you have 
   styleUrls: ['./sidebar.scss']
 })
 export class Sidebar implements OnInit {
-  isSidebarOpen: boolean = true;
-  isUsersDropdownOpen: boolean = false;
-  role: string = ''; // admin or developer
+  isSidebarOpen = false;
+  isUsersDropdownOpen = false;
+  screenIsLarge = false;
+  role: string | null = null;
 
   constructor(
     private sidebarService: SidebarService,
     private authService: AuthService
   ) {}
 
-ngOnInit(): void {
-  this.sidebarService.isSidebarOpen$.subscribe(isOpen => {
-    this.isSidebarOpen = isOpen;
-  });
+  ngOnInit(): void {
+    this.checkScreenSize();
 
-  // Subscribe to the user role so sidebar updates reactively
-  this.authService.userRole$.subscribe(role => {
-    this.role = role;
-  });
-}
+    // Subscribe to userRole$ Observable
+    this.authService.userRole$.subscribe(role => {
+      this.role = role;
+    });
+  }
 
   toggleSidebar(): void {
-    this.sidebarService.toggleSidebar();
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   toggleUsersDropdown(): void {
     this.isUsersDropdownOpen = !this.isUsersDropdownOpen;
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize(): void {
+    this.screenIsLarge = window.innerWidth >= 1024; // lg breakpoint in Tailwind
+    if (this.screenIsLarge) {
+      this.isSidebarOpen = true; // always open on desktop
+    } else {
+      this.isSidebarOpen = false; // closed by default on mobile
+    }
   }
 }

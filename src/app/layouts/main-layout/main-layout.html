@@ -84,19 +84,19 @@
 </nav>
 
 <!-- MAIN CONTENT -->
-<div class="flex pt-16 bg-gray-50 min-h-screen">
+<div class="flex pt-16 min-h-screen bg-gray-50">
+
+  <!-- Sidebar -->
   <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
 
-  <main
-    class="flex-1 transition-all duration-300 px-4 sm:px-6 lg:px-8 py-8"
-    [ngClass]="{
-      'md:ml-64': isSidebarOpen && shouldShowSidebar(),
-      'md:ml-20': !isSidebarOpen && shouldShowSidebar()
-    }"
-  >
-    <router-outlet></router-outlet>
-  </main>
+  <!-- Main content -->
+<main class="flex-1 transition-all duration-300 px-4 sm:px-6 lg:px-8 py-8">
+  <router-outlet></router-outlet>
+</main>
+
+
 </div>
+
 
 <!-- FOOTER -->
 <footer class="bg-gray-900 py-6 text-center text-gray-400 px-4 sm:px-6 lg:px-8">
