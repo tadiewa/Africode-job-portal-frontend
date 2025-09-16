@@ -1,317 +1,256 @@
-<!-- C:\Talent Pool\code-africa\src\app\pages\join-network\join-network.component.html -->
-<div class="flex items-center justify-center min-h-screen pt-20 pb-20">
-   <section class="w-full max-w-5xl px-4 sm:px-5 lg:px-6 mx-auto bg-gray-100 p-6 rounded-xl shadow-xl text-gray-900 relative">
+<div class="flex items-center justify-center min-h-screen pt-10 pb-10 sm:pt-20 sm:pb-20 bg-gray-50">
+  <section class="w-full max-w-5xl px-4 sm:px-6 lg:px-8 mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-xl text-gray-800 relative">
 
-        <!-- Close Button -->
-        <button (click)="onClose()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
+    <!-- Close button -->
+    <button (click)="onClose()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
 
-        <div class="explore-developers-container mx-auto py-4 join-network-container">
-            <h2 class="text-4xl font-bold mb-6 text-center">Join the Africode Developer Network</h2>
-            <p class="text-center text-gray-300 mb-8">
-                Connect with global opportunities and showcase your skills to international clients.
-            </p>
+    <div class="explore-developers-container mx-auto py-4 join-network-container">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-center">Join the Africode Developer Network</h2>
+      <p class="text-center text-gray-500 mb-6 sm:mb-8 text-sm sm:text-base">Connect with global opportunities and showcase your skills to international clients.</p>
 
-            <form [formGroup]="joinForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <form [formGroup]="joinForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
-                <section>
-                    <h3 class="text-xl font-semibold mb-4 border-b border-gray-700 pb-1">Personal Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="firstName" class="block mb-1">First Name *</label>
-                            <input id="firstName" formControlName="firstName" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white" />
-                            <div *ngIf="joinForm.get('firstName')?.invalid && joinForm.get('firstName')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                First Name is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="lastName" class="block mb-1">Last Name *</label>
-                            <input id="lastName" formControlName="lastName" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white" />
-                            <div *ngIf="joinForm.get('lastName')?.invalid && joinForm.get('lastName')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Last Name is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="email" class="block mb-1">Email *</label>
-                            <input type="email" id="email" formControlName="email" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white" />
-                            <div *ngIf="joinForm.get('email')?.invalid && joinForm.get('email')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Valid Email is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="password" class="block mb-1">Password *</label>
-                            <input type="password" id="password" formControlName="password" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white" />
-                            <div *ngIf="joinForm.get('password')?.invalid && joinForm.get('password')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Password is required and must be at least 8 characters.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="phoneNumber" class="block mb-1">Phone Number</label>
-                            <input id="phoneNumber" formControlName="phoneNumber"
-                                class="w-full border p-2 rounded bg-gray-800 text-white" />
-                        </div>
-                        <div>
-                            <label for="country" class="block mb-1">Country *</label>
-                            <select id="country" formControlName="country" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Country</option>
-                                <option *ngFor="let c of africanCountries" [value]="c.code">{{ c.name }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('country')?.invalid && joinForm.get('country')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Country is required.
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <!-- Personal Information -->
+        <section>
+          <h3 class="text-lg sm:text-xl font-semibold mb-4 border-b border-gray-200 pb-1">Personal Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block mb-1">First Name *</label>
+              <input id="firstName" formControlName="firstName" required class="w-full border p-3 rounded bg-gray-50 text-gray-800" />
+              <div *ngIf="joinForm.get('firstName')?.invalid && joinForm.get('firstName')?.touched" class="text-red-500 text-sm mt-1">First Name is required.</div>
+            </div>
+            <div>
+              <label for="lastName" class="block mb-1">Last Name *</label>
+              <input id="lastName" formControlName="lastName" required class="w-full border p-3 rounded bg-gray-50 text-gray-800" />
+              <div *ngIf="joinForm.get('lastName')?.invalid && joinForm.get('lastName')?.touched" class="text-red-500 text-sm mt-1">Last Name is required.</div>
+            </div>
+            <div>
+              <label for="email" class="block mb-1">Email *</label>
+              <input type="email" id="email" formControlName="email" required class="w-full border p-3 rounded bg-gray-50 text-gray-800" />
+              <div *ngIf="joinForm.get('email')?.invalid && joinForm.get('email')?.touched" class="text-red-500 text-sm mt-1">Valid Email is required.</div>
+            </div>
+            <div>
+              <label for="password" class="block mb-1">Password *</label>
+              <input type="password" id="password" formControlName="password" required class="w-full border p-3 rounded bg-gray-50 text-gray-800" />
+              <div *ngIf="joinForm.get('password')?.invalid && joinForm.get('password')?.touched" class="text-red-500 text-sm mt-1">Password is required and must be at least 8 characters.</div>
+            </div>
+            <div>
+              <label for="phoneNumber" class="block mb-1">Phone Number</label>
+              <input id="phoneNumber" formControlName="phoneNumber" class="w-full border p-3 rounded bg-gray-50 text-gray-800" />
+            </div>
+            <div>
+              <label for="country" class="block mb-1">Country *</label>
+              <select id="country" formControlName="country" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Country</option>
+                <option *ngFor="let c of africanCountries" [value]="c.code">{{ c.name }}</option>
+              </select>
+              <div *ngIf="joinForm.get('country')?.invalid && joinForm.get('country')?.touched" class="text-red-500 text-sm mt-1">Country is required.</div>
+            </div>
+          </div>
+        </section>
 
-                <section>
-                    <h3 class="text-xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-1">Developer Profile</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="experienceLevel" class="block mb-1">Experience Level *</label>
-                            <select id="experienceLevel" formControlName="experienceLevel" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Level</option>
-                                <option *ngFor="let level of experienceLevels" [value]="level">{{ level }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('experienceLevel')?.invalid && joinForm.get('experienceLevel')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Experience Level is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="hourlyRate" class="block mb-1">Expected Hourly Rate *</label>
-                            <select id="hourlyRate" formControlName="hourlyRate" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Rate</option>
-                                <option *ngFor="let rate of hourlyRateRanges" [value]="rate">{{ rate }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('hourlyRate')?.invalid && joinForm.get('hourlyRate')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Hourly Rate is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="availability" class="block mb-1">Availability *</label>
-                            <select id="availability" formControlName="availability" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Availability</option>
-                                <option *ngFor="let option of availabilityOptions" [value]="option">{{ option }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('availability')?.invalid && joinForm.get('availability')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Availability is required.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="englishLevel" class="block mb-1">English Proficiency *</label>
-                            <select id="englishLevel" formControlName="englishLevel" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Level</option>
-                                <option *ngFor="let level of englishLevels" [value]="level">{{ level }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('englishLevel')?.invalid && joinForm.get('englishLevel')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                English Proficiency is required.
-                            </div>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="preferredTimeZone" class="block mb-1">Preferred Working Timezone *</label>
-                            <select id="preferredTimeZone" formControlName="preferredTimeZone" required
-                                class="w-full border p-2 rounded bg-gray-800 text-white">
-                                <option value="">Select Timezone</option>
-                                <option *ngFor="let tz of timezones" [value]="tz.value">{{ tz.label }}</option>
-                            </select>
-                            <div *ngIf="joinForm.get('preferredTimeZone')?.invalid && joinForm.get('preferredTimeZone')?.touched"
-                                class="text-red-400 text-sm mt-1">
-                                Timezone is required.
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <!-- Developer Profile -->
+        <section>
+          <h3 class="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-4 border-b border-gray-200 pb-1">Developer Profile</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="roles" class="block mb-1">Position*</label>
+              <select id="roles" formControlName="role" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Role</option>
+                <option *ngFor="let role of roles | keyvalue" [value]="role.value">{{ role.key }}</option>
+              </select>
+              <div *ngIf="joinForm.get('role')?.invalid && joinForm.get('role')?.touched" class="text-red-500 text-sm mt-1">Role is required.</div>
+            </div>
+            <div>
+              <label for="experienceLevel" class="block mb-1">Experience Level *</label>
+              <select id="experienceLevel" formControlName="experienceLevel" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Level</option>
+                <option *ngFor="let level of experienceLevels" [value]="level">{{ level }}</option>
+              </select>
+              <div *ngIf="joinForm.get('experienceLevel')?.invalid && joinForm.get('experienceLevel')?.touched" class="text-red-500 text-sm mt-1">Experience Level is required.</div>
+            </div>
+            <div>
+              <label for="hourlyRate" class="block mb-1">Expected Hourly Rate *</label>
+              <select id="hourlyRate" formControlName="hourlyRate" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Rate</option>
+                <option *ngFor="let rate of hourlyRateRanges" [value]="rate">{{ rate }}</option>
+              </select>
+              <div *ngIf="joinForm.get('hourlyRate')?.invalid && joinForm.get('hourlyRate')?.touched" class="text-red-500 text-sm mt-1">Hourly Rate is required.</div>
+            </div>
+            <div>
+              <label for="availability" class="block mb-1">Availability *</label>
+              <select id="availability" formControlName="availability" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Availability</option>
+                <option *ngFor="let option of availabilityOptions" [value]="option">{{ option }}</option>
+              </select>
+              <div *ngIf="joinForm.get('availability')?.invalid && joinForm.get('availability')?.touched" class="text-red-500 text-sm mt-1">Availability is required.</div>
+            </div>
+            <div>
+              <label for="englishLevel" class="block mb-1">English Proficiency *</label>
+              <select id="englishLevel" formControlName="englishLevel" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Level</option>
+                <option *ngFor="let level of englishLevels" [value]="level">{{ level }}</option>
+              </select>
+              <div *ngIf="joinForm.get('englishLevel')?.invalid && joinForm.get('englishLevel')?.touched" class="text-red-500 text-sm mt-1">English Proficiency is required.</div>
+            </div>
+            <div class="md:col-span-2">
+              <label for="preferredTimeZone" class="block mb-1">Preferred Working Timezone *</label>
+              <select id="preferredTimeZone" formControlName="preferredTimeZone" required class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                <option value="">Select Timezone</option>
+                <option *ngFor="let tz of timezones" [value]="tz.value">{{ tz.label }}</option>
+              </select>
+              <div *ngIf="joinForm.get('preferredTimeZone')?.invalid && joinForm.get('preferredTimeZone')?.touched" class="text-red-500 text-sm mt-1">Timezone is required.</div>
+            </div>
+          </div>
+        </section>
 
-                <section>
-                    <h3 class="text-xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-1">Technical Skills</h3>
+        <!-- Technical Skills Section -->
+        <section>
+          <h3 class="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-4 border-b border-gray-200 pb-1">Technical Skills</h3>
 
-                    <!-- Primary Skills -->
-                    <div class="mb-8">
-                        <label class="block text-lg font-semibold mb-2">Primary Skills & Technologies *</label>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                            <div>
-                                <label for="selectedPrimaryCategory" class="block text-sm mb-1">Category</label>
-                                <select id="selectedPrimaryCategory" formControlName="selectedPrimaryCategory"
-                                    class="w-full border p-2 rounded bg-gray-800 text-white">
-                                    <option value="">Select a category</option>
-                                    <option *ngFor="let category of skillCategoriesKeys" [value]="category">{{ category }}</option>
-                                </select>
-                            </div>
-                            <div>
-                                <select id="selectedPrimarySkill" formControlName="selectedPrimarySkill"
-                                    class="w-full border p-2 rounded bg-gray-800 text-white">
-                                    <option value="">Select skills from category</option>
-                                    <option *ngFor="let skill of primarySkillsOptions" [value]="skill">{{ skill }}</option>
-                                </select>
-
-                            </div>
-                            <div class="flex flex-col md:flex-row gap-3 items-end">
-                                <div class="flex-1">
-                                    <label for="selectedPrimarySkillLevel" class="block text-sm mb-1">Level</label>
-                                    <select id="selectedPrimarySkillLevel" formControlName="selectedPrimarySkillLevel"
-                                        class="w-full border p-2 rounded bg-gray-800 text-white">
-                                        <option value="">Select level</option>
-                                        <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
-                                    </select>
-
-
-                                </div>
-                                <button type="button"
-                                    (click)="addSkill(primarySkillsArray, 'selectedPrimarySkill', 'selectedPrimarySkillLevel', 'selectedPrimaryCategory')"
-                                    [disabled]="!joinForm.get('selectedPrimarySkill')?.value || !joinForm.get('selectedPrimarySkillLevel')?.value"
-                                    class="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 w-full md:w-auto">Add</button>
-                            </div>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                            <span *ngFor="let skill of primarySkillsArray.controls; let i = index"
-                                class="bg-gray-700 text-sm px-3 py-1 rounded-full flex items-center">
-                                {{ skill.value.skill }} ({{ skill.value.level }})
-                                <button type="button" (click)="removeSkill(primarySkillsArray, i)"
-                                    class="ml-2 text-red-400 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
-                        <div *ngIf="primarySkillsArray.invalid && joinForm.touched" class="text-red-400 text-sm mt-1">
-                            At least one primary skill is required.
-                        </div>
-                    </div>
-
-                    <!-- Additional Frameworks & Libraries -->
-                    <div class="mb-8">
-                        <label class="block text-lg font-semibold mb-2">Additional Frameworks & Libraries</label>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                            <div>
-                                <label for="selectedFrameworkCategory" class="block text-sm mb-1">Category</label>
-                                <select id="selectedFrameworkCategory" formControlName="selectedFrameworkCategory"
-                                    class="w-full border p-2 rounded bg-gray-800 text-white">
-                                    <option value="">Select a category</option>
-                                    <option *ngFor="let category of skillCategoriesKeys" [value]="category">{{ category }}</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="selectedFrameworkSkill" class="block text-sm mb-1">Skill</label>
-                                <select id="selectedFrameworkSkill" formControlName="selectedFrameworkSkill"
-                                    class="w-full border p-2 rounded bg-gray-800 text-white">
-                                    <option value="">Select additional skills</option>
-                                    <option *ngFor="let skill of frameworksOptions" [value]="skill">{{ skill }}</option>
-                                </select>
-
-                            </div>
-                            <div class="flex flex-col md:flex-row gap-3 items-end">
-                                <div class="flex-1">
-                                    <label for="selectedFrameworkSkillLevel" class="block text-sm mb-1">Level</label>
-                                    <select id="selectedFrameworkSkillLevel" formControlName="selectedFrameworkSkillLevel"
-                                        class="w-full border p-2 rounded bg-gray-800 text-white">
-                                        <option value="">Select level</option>
-                                        <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
-                                    </select>
-
-                                </div>
-                                <button type="button"
-                                    (click)="addSkill(additionalFrameworksArray, 'selectedFrameworkSkill', 'selectedFrameworkSkillLevel', 'selectedFrameworkCategory')"
-                                    [disabled]="!joinForm.get('selectedFrameworkSkill')?.value || !joinForm.get('selectedFrameworkSkillLevel')?.value"
-                                    class="bg-cyan-600 text-white px-4 py-2 rounded-md hover:bg-cyan-700 w-full md:w-auto">Add</button>
-                            </div>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                            <span *ngFor="let skill of additionalFrameworksArray.controls; let i = index"
-                                class="bg-gray-700 text-sm px-3 py-1 rounded-full flex items-center">
-                                {{ skill.value.skill }} ({{ skill.value.level }})
-                                <button type="button" (click)="removeSkill(additionalFrameworksArray, i)"
-                                    class="ml-2 text-red-400 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </section>
-
-
-                <section>
-                    <h3 class="text-xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-1">Online Presence</h3>
-                    <div>
-                        <label for="github" class="block text-sm font-semibold mb-1">GitHub Profile *</label>
-                        <input type="url" id="github" formControlName="github" required
-                            class="w-full p-3 rounded bg-gray-800 text-white" placeholder="https://github.com/yourusername" />
-                        <div *ngIf="joinForm.get('github')?.touched && joinForm.get('github')?.invalid"
-                            class="text-red-400 text-sm mt-1">
-                            GitHub link is required and must be valid.
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <label for="website" class="block text-sm font-semibold mb-1">Portfolio Website</label>
-                        <input type="url" id="website" formControlName="website" class="w-full p-3 rounded bg-gray-800 text-white"
-                            placeholder="https://yourportfolio.com" />
-                    </div>
-
-                    <div class="mt-4">
-                        <label for="linkedIn" class="block text-sm font-semibold mb-1">LinkedIn Profile</label>
-                        <input type="url" id="linkedIn" formControlName="linkedIn" class="w-full p-3 rounded bg-gray-800 text-white"
-                            placeholder="https://linkedin.com/in/yourname" />
-                    </div>
-                </section>
-
-                <section class="p-4">
-                    <h3 class="text-xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-1">Work Preferences</h3>
-                    <div class="space-y-4">
-                        <label class="flex items-start">
-                            <input type="checkbox" formControlName="remoteExperience" class="accent-cyan-500" />
-                            <span class="ml-2">I have experience working remotely with international teams</span>
-                        </label>
-
-                        <label class="flex items-start">
-                            <input type="checkbox" formControlName="acceptsNda" class="accent-cyan-500" />
-                            <span class="ml-2">I'm willing to sign NDAs and work with confidential projects</span>
-                        </label>
-                    </div>
-                </section>
-
-                <div *ngIf="formError" class="text-red-500 text-sm text-center mt-4">
-                    {{ formError }}
+          <!-- Primary Skills -->
+          <div class="mb-6">
+            <label class="block text-base sm:text-lg font-semibold mb-2">Primary Skills & Technologies *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end">
+              <div>
+                <label class="block text-sm mb-1">Category</label>
+                <select formControlName="selectedPrimaryCategory" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                  <option value="">Select a category</option>
+                  <option *ngFor="let category of skillCategoriesKeys" [value]="category">{{ category }}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Skill</label>
+                <select formControlName="selectedPrimarySkill" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                  <option value="">Select skills from category</option>
+                  <option *ngFor="let skill of primarySkillsOptions" [value]="skill">{{ skill }}</option>
+                </select>
+              </div>
+              <div class="flex flex-col md:flex-row gap-3 items-end">
+                <div class="flex-1">
+                  <label class="block text-sm mb-1">Level</label>
+                  <select formControlName="selectedPrimarySkillLevel" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                    <option value="">Select level</option>
+                    <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
+                  </select>
                 </div>
+                <button type="button"
+                  (click)="addSkill(primarySkillsArray, 'selectedPrimarySkill', 'selectedPrimarySkillLevel', 'selectedPrimaryCategory')"
+                  [disabled]="!joinForm.get('selectedPrimarySkill')?.value || !joinForm.get('selectedPrimarySkillLevel')?.value"
+                  class="bg-cyan-500 text-white px-4 py-2 rounded-md hover:bg-cyan-600 w-full md:w-auto">Add</button>
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span *ngFor="let skill of primarySkillsArray.controls; let i = index"
+                class="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full flex items-center">
+                {{ skill.value.skill }} ({{ skill.value.level }})
+                <button type="button" (click)="removeSkill(primarySkillsArray, i)" class="ml-2 text-gray-500 hover:text-red-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </span>
+            </div>
+            <div *ngIf="primarySkillsArray.invalid && joinForm.touched" class="text-red-500 text-sm mt-1">
+              At least one primary skill is required.
+            </div>
+          </div>
 
-                <div class="text-center pt-6 flex justify-center space-x-4">
-                    <button type="submit" [disabled]="loading"
-                        class="bg-cyan-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-cyan-600 flex-1 max-w-xs">
-                        {{ loading ? 'Submitting...' : 'Join Africode Network' }}
-                    </button>
-
-
-                    <button type="button" (click)="onCancel()"
-                        class="bg-gray-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-gray-700 transition flex-1 max-w-xs">
-                        Cancel
-                    </button>
+          <!-- Additional Frameworks & Libraries -->
+          <div class="mb-6">
+            <label class="block text-base sm:text-lg font-semibold mb-2">Additional Frameworks & Libraries</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end">
+              <div>
+                <label class="block text-sm mb-1">Category</label>
+                <select formControlName="selectedFrameworkCategory" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                  <option value="">Select a category</option>
+                  <option *ngFor="let category of skillCategoriesKeys" [value]="category">{{ category }}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Skill</label>
+                <select formControlName="selectedFrameworkSkill" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                  <option value="">Select additional skills</option>
+                  <option *ngFor="let skill of frameworksOptions" [value]="skill">{{ skill }}</option>
+                </select>
+              </div>
+              <div class="flex flex-col md:flex-row gap-3 items-end">
+                <div class="flex-1">
+                  <label class="block text-sm mb-1">Level</label>
+                  <select formControlName="selectedFrameworkSkillLevel" class="w-full border p-3 rounded bg-gray-50 text-gray-800">
+                    <option value="">Select level</option>
+                    <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
+                  </select>
                 </div>
+                <button type="button"
+                  (click)="addSkill(additionalFrameworksArray, 'selectedFrameworkSkill', 'selectedFrameworkSkillLevel', 'selectedFrameworkCategory')"
+                  [disabled]="!joinForm.get('selectedFrameworkSkill')?.value || !joinForm.get('selectedFrameworkSkillLevel')?.value"
+                  class="bg-cyan-500 text-white px-4 py-2 rounded-md hover:bg-cyan-600 w-full md:w-auto">Add</button>
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span *ngFor="let skill of additionalFrameworksArray.controls; let i = index"
+                class="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full flex items-center">
+                {{ skill.value.skill }} ({{ skill.value.level }})
+                <button type="button" (click)="removeSkill(additionalFrameworksArray, i)" class="ml-2 text-gray-500 hover:text-red-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </span>
+            </div>
+          </div>
+        </section>
 
-            </form>
+        <!-- Online Presence -->
+        <section>
+          <h3 class="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-4 border-b border-gray-200 pb-1">Online Presence</h3>
+          <div class="space-y-4">
+            <div>
+              <label for="github" class="block text-sm font-semibold mb-1">GitHub Profile *</label>
+              <input type="url" id="github" formControlName="github" required class="w-full p-3 rounded bg-gray-50 text-gray-800" placeholder="https://github.com/yourusername" />
+              <div *ngIf="joinForm.get('github')?.touched && joinForm.get('github')?.invalid" class="text-red-500 text-sm mt-1">GitHub link is required and must be valid.</div>
+            </div>
+            <div>
+              <label for="website" class="block text-sm font-semibold mb-1">Portfolio Website</label>
+              <input type="url" id="website" formControlName="website" class="w-full p-3 rounded bg-gray-50 text-gray-800" placeholder="https://yourportfolio.com" />
+            </div>
+            <div>
+              <label for="linkedIn" class="block text-sm font-semibold mb-1">LinkedIn Profile</label>
+              <input type="url" id="linkedIn" formControlName="linkedIn" class="w-full p-3 rounded bg-gray-50 text-gray-800" placeholder="https://linkedin.com/in/yourname" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Preferences -->
+        <section class="p-4 bg-gray-50 rounded-lg">
+          <h3 class="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-4 border-b border-gray-200 pb-1">Work Preferences</h3>
+          <div class="space-y-4">
+            <label class="flex items-start">
+              <input type="checkbox" formControlName="remoteExperience" class="accent-cyan-500" />
+              <span class="ml-2 text-sm sm:text-base">I have experience working remotely with international teams</span>
+            </label>
+            <label class="flex items-start">
+              <input type="checkbox" formControlName="acceptsNda" class="accent-cyan-500" />
+              <span class="ml-2 text-sm sm:text-base">I'm willing to sign NDAs and work with confidential projects</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- Form error -->
+        <div *ngIf="formError" class="text-red-500 text-sm text-center mt-4">{{ formError }}</div>
+
+        <!-- Submit / Cancel -->
+        <div class="text-center pt-6 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <button type="submit" [disabled]="loading" class="bg-cyan-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-cyan-600 w-full sm:w-auto">{{ loading ? 'Submitting...' : 'Join Africode Network' }}</button>
+          <button type="button" (click)="onCancel()" class="bg-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-full hover:bg-gray-400 transition w-full sm:w-auto">Cancel</button>
         </div>
-    </section>
+
+      </form>
+    </div>
+  </section>
 </div>

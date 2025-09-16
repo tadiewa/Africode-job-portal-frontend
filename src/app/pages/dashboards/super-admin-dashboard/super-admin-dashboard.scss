@@ -1,30 +1,49 @@
 /* A sleek, modern dashboard with a professional light theme */
 
-// Define a professional color palette for a light theme
+// Palette
 $background-light: #f0f2f5;
 $card-light: #ffffff;
 $text-dark: #333333;
 $text-muted: #666666;
 $shadow-light: rgba(0, 0, 0, 0.1);
 
-// Mixin for clean transitions
+// Transition mixin
 @mixin transition-ease($property) {
   transition: $property 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-// Global styling for a modern feel
+/* Global box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Body fix
+body {
+  overflow-x: hidden;
+}
+
+// Dashboard container
 .dashboard-container {
   font-family: 'Inter', sans-serif;
   background-color: $background-light;
   color: $text-dark;
   min-height: 100vh;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  overflow-x: hidden;
+  max-width: 100vw;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
 }
 
-// Common card styling for a unified look
+// Cards and common styling
 .count-card,
 .chart-card,
 .top-developers-table {
@@ -33,6 +52,9 @@ $shadow-light: rgba(0, 0, 0, 0.1);
   padding: 2rem;
   box-shadow: 0 8px 24px $shadow-light;
   @include transition-ease(transform);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 
   &:hover {
     transform: translateY(-8px);
@@ -40,11 +62,17 @@ $shadow-light: rgba(0, 0, 0, 0.1);
   }
 }
 
-// Styling for the inquiry counts section
+// Inquiry counts
 .counts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
   .count-card {
     display: flex;
@@ -73,12 +101,11 @@ $shadow-light: rgba(0, 0, 0, 0.1);
       }
 
       .percentage {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         font-weight: 600;
         padding: 0.25rem 0.5rem;
         border-radius: 12px;
         color: #fff;
-        background-color: #5cb85c;
       }
     }
 
@@ -91,7 +118,7 @@ $shadow-light: rgba(0, 0, 0, 0.1);
       }
 
       p {
-        font-size: 2rem;
+        font-size: clamp(1.2rem, 2vw, 2rem);
         font-weight: 700;
         color: $text-dark;
         margin: 0.5rem 0 1rem;
@@ -118,8 +145,8 @@ $shadow-light: rgba(0, 0, 0, 0.1);
       }
     }
   }
-  
-  // Specific color theming for each card
+
+  // Color variants
   .submitted-card {
     .icon-container { background-color: #0d83ff; }
     .percentage { background-color: #5394ff; }
@@ -137,31 +164,30 @@ $shadow-light: rgba(0, 0, 0, 0.1);
     .percentage { background-color: #4CAF50; }
     .progress-bar { background-color: #5cb85c; }
   }
-  
+
   .total-dev-card {
-    .icon-container { background-color: #d8579d; } // Example color
-    .percentage { background-color: #c44a8b; } // Example color
-    .progress-bar { background-color: #d8579d; } // Example color
+    .icon-container { background-color: #d8579d; }
+    .percentage { background-color: #c44a8b; }
+    .progress-bar { background-color: #d8579d; }
   }
 }
 
-// Styling for the charts section
+// Charts
 .charts {
   display: grid;
-  gap: 2.5rem;
-  grid-template-columns: 1fr; // default: 1 chart per row
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  width: 100%;
 
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(2, 1fr); // 2 charts side by side
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .chart-card {
-    display: flex;
-    flex-direction: column;
-    height: auto; // let content dictate height
+    overflow: hidden;
 
     h4 {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 1rem;
       display: flex;
@@ -171,18 +197,46 @@ $shadow-light: rgba(0, 0, 0, 0.1);
     }
 
     canvas {
-      width: 100%;
-      height: 250px;       // smaller default height
-      max-height: 300px;   // limit maximum height
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100% !important;
+      max-height: 300px;
     }
   }
 }
 
+// Table
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
-// Styling for the top developers section
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+
+    th, td {
+      padding: 10px 8px;
+      text-align: left;
+      border: 1px solid #e0e0e0;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    table th, table td {
+      font-size: 0.75rem;
+      padding: 6px 4px;
+    }
+  }
+}
+
+// Top developers header
 .top-developers-table {
   h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
     display: flex;
@@ -190,52 +244,24 @@ $shadow-light: rgba(0, 0, 0, 0.1);
     gap: 0.5rem;
     color: $text-dark;
 
-    i {
-      color: #06B6D4;
-    }
+    i { color: #06B6D4; }
   }
 
   table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #e0e0e0; // outer border
-
-    th, td {
-      padding: 12px 10px;
-      text-align: left;
-      border: 1px solid #e0e0e0; // all sides
-      font-size: 0.95rem;
-    }
-
     th {
       background: #06B6D4;
       color: #fff;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      &:first-child { border-top-left-radius: 8px; }
-      &:last-child { border-top-right-radius: 8px; }
     }
 
-    tbody tr:nth-child(even) {
-      background-color: #f9fafb; // zebra stripes
-    }
-
-    tbody tr:hover {
-      background-color: #f1f5f9; // hover effect
-    }
+    tbody tr:nth-child(even) { background-color: #f9fafb; }
+    tbody tr:hover { background-color: #f1f5f9; }
   }
 }
 
-// Styling for the loading state
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: 1.8rem;
-  color: $text-muted;
-}
+// Spinner
 .spinner-container {
   display: flex;
   flex-direction: column;
@@ -246,8 +272,8 @@ $shadow-light: rgba(0, 0, 0, 0.1);
 }
 
 .spinner {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid #06B6D4; /* Blue */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #06B6D4;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -256,6 +282,71 @@ $shadow-light: rgba(0, 0, 0, 0.1);
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
+}
+
+// === MOBILE SPECIFIC TWEAKS FOR SMALLER CARDS & NO SCROLL ===
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .counts {
+    gap: 0.75rem;
+    grid-template-columns: 1fr !important;
+  }
+
+  .count-card,
+  .chart-card,
+  .top-developers-table {
+    padding: 0.75rem;
+    width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+
+    .header {
+      .icon-container {
+        width: 32px;
+        height: 32px;
+
+        i { font-size: 1rem; }
+      }
+
+      .percentage {
+        font-size: 0.55rem;
+        padding: 0.1rem 0.3rem;
+      }
+    }
+
+    .content {
+      h4 { font-size: 0.85rem; }
+      p { font-size: clamp(0.9rem, 1.5vw, 1.2rem); }
+      .target { font-size: 0.7rem; }
+    }
+  }
+
+  .charts {
+    gap: 1rem;
+
+    .chart-card canvas {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: 180px !important;
+    }
+  }
+
+  .table-responsive {
+    width: 100% !important;
+    overflow-x: auto;
+
+    table {
+      width: 100% !important;
+      th, td {
+        font-size: 0.7rem;
+        padding: 4px 2px;
+      }
+    }
+  }
 }

@@ -1,3 +1,6 @@
 :host {
   display: block;
 }
+aside {
+  @apply transform lg:transform-none; // animate only on mobile
+}

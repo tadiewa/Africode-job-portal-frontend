@@ -15,7 +15,8 @@ import {
   hourlyRateRanges,
   availabilityOptions,
   countriesInAfrica,
-  skillsCategories
+  skillsCategories,
+  roles,
 } from '../../constants/developer-data';
 
 @Component({
@@ -35,6 +36,7 @@ export class JoinNetworkComponent {
   experienceLevels = experienceLevels;
   englishLevels = englishLevels;
   hourlyRateRanges = hourlyRateRanges;
+  roles=roles;
   availabilityOptions = availabilityOptions;
   skillLevels: string[] = ['Beginner', 'Intermediate', 'Advanced', 'Expert']; // Define skill levels
 
@@ -60,6 +62,7 @@ constructor(private fb: FormBuilder, private router: Router, private apiService:
     country: ['', Validators.required],
     experienceLevel: ['', Validators.required],
     hourlyRate: ['', Validators.required],
+    role:['',Validators.required],
     availability: ['', Validators.required],
     englishLevel: ['', Validators.required],
     preferredTimeZone: ['Africa/Johannesburg', Validators.required], // Renamed from 'timezone'
@@ -220,6 +223,7 @@ constructor(private fb: FormBuilder, private router: Router, private apiService:
       firstName: this.joinForm.value.firstName,
       lastName: this.joinForm.value.lastName,
       country: this.joinForm.value.country,
+      role: this.joinForm.value.role,
       phoneNumber: this.joinForm.value.phoneNumber,
       experienceLevel: this.joinForm.value.experienceLevel,
       hourlyRate: this.joinForm.value.hourlyRate,
